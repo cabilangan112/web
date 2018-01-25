@@ -1,31 +1,22 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from datetime import date
+from datetime import time
 from django.db import models
 
 # Create your models here.
 class detail(models.Model):
-	Last_name    		= models.CharField(max_length=200)
-	First_name			= models.CharField(max_length=200)	
-	Gender = (
-        ('m', 'Male'),
-        ('o', 'Female'),
-	)
-	Sex			 		 = models.CharField(max_length=1, choices=Gender, blank=True, default='m')
-	Faculty_dep			 = models.ForeignKey('Department', on_delete=models.CASCADE)
-	def __str__(self):
-		return self.Last_name
-		
-class Department(models.Model):
-	dep = (
-        ('C', 'CITE'),
-	)
-	Department			  = models.CharField(max_length=1, choices=dep, blank=True, default='C')
-	BSCS				  = models.BooleanField(default=False)
-	BSIT				  = models.BooleanField(default=False)
-	BSIS				  = models.BooleanField(default=False)
-	BSCPE			      = models.BooleanField(default=False)
-
+	Last_name    		 = models.CharField(max_length=200)
+	First_name			 = models.CharField(max_length=200)	
+	Subject				 = models.CharField(max_length=200)
+	Evaluation_Date      = models.DateField(default=date.today)
+	Time			     = models.TimeField(null=True, blank=True)
 	
 	def __str__(self):
-		return self.Department
+		return self.Last_name
+	
+	def get_absolute_url(self):
+		return reverse('detail', args=[str(self.id)])
+	
+ 
+		
