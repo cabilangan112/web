@@ -6,13 +6,12 @@ from django.db import models
 # Create your models here.
 class detail(models.Model):
 	Last_name    		= models.CharField(max_length=200)
-	First_name			= models.CharField(max_length=200)
-		
+	First_name			= models.CharField(max_length=200)	
 	Gender = (
         ('m', 'Male'),
         ('o', 'Female'),
 	)
-	Sex			 		 =   models.CharField(max_length=1, choices=Gender, blank=True, default='m')
+	Sex			 		 = models.CharField(max_length=1, choices=Gender, blank=True, default='m')
 	Faculty_dep			 = models.ForeignKey('Department', on_delete=models.CASCADE)
 	def __str__(self):
 		return self.Last_name
