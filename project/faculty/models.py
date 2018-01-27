@@ -12,11 +12,9 @@ class detail(models.Model):
 	Evaluation_Date      = models.DateField(default=date.today)
 	Time			     = models.TimeField(null=True, blank=True)
 	
+	
 	def __str__(self):
 		return self.Last_name
 	
 	def get_absolute_url(self):
 		return reverse('detail', args=[str(self.id)])
-	
- 
-		
