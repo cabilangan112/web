@@ -1,4 +1,14 @@
-<h1>{{ question.question_text }}</h1>{{ question.Name_of_Faculty.Last_name}}
+ 
+{% block content %}
+	<br>
+   <h2>foem</h2>
+	<form method="post" >
+		{% csrf_token %}
+		{{ form.as_p}}
+		<input type="submit" value="Add Student"><span></span>	  <h2><a href=" ">Student Grade<a></h2>
+	</form>
+		
+ <h1>{{ question.question_text }}</h1>{{ question.Name_of_Faculty.Last_name}}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
@@ -10,3 +20,7 @@
 {% endfor %}
 <input type="submit" value="Vote" />
 </form>
+	  
+{% endblock %}
+
+

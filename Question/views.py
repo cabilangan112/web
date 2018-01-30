@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from django.views import generic
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.template import loader
 from django.shortcuts import render
 from .models import Question, Choice
 from django.urls import reverse
-
+from Faculty.models import detail
+from .forms import ChoiceForm
+from django.views.generic import DetailView,View,ListView
 
 
 def index(request):
@@ -16,8 +19,33 @@ def index(request):
 
 
 def detail(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'detail.html', {'question': question})
+	question = get_object_or_404(Question, pk=question_id)
+	return render(request, 'detail.html', {'question': question})
+	
+class choice(View):
+	def get(self, request):
+		choices = Choice.objects.all()
+		context = {
+			'choices' :choices,
+			'form' : ChoiceForm,
+		}
+		return render(request, "choiceform.html", context)
+	
+	def post(self, request):
+		
+		form = ChoiceForm(request.POST)
+		choices = Choice.objects.all()
+		
+		if form.is_valid():
+			form.save()
+			return redirect('Choice')
+			
+		context = {
+			'form' : form,
+			'choices' : choices,
+		}
+		
+		return render(request, "choiceform.html", context)
 	
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)

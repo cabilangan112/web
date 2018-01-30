@@ -8,5 +8,6 @@ urlpatterns = [
 	url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
 	url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name='results'),
 	url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
+	url(r'^choices', views.choice.as_view(), name='choice-form'),
 	url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
 ]
